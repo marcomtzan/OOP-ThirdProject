@@ -1,0 +1,70 @@
+CISP 401
+Assign 2b (Design Notes)
+
+
+
+		Employee[] myEmps = new Employee[100]; // creates (It creates 100 UNITIALIZED "references" which 
+								   point to NOTHING !!!!)
+		Object[] myEmps = new Employee[100];
+
+		myEmps[0] = new Employee("Doe","John", 40, 5.00); // creates a "john" object
+			myEmps[0].{calcGross(), calcTax(), calcNet(), get(), toString()}
+
+		
+		myEmps[1] = new Employee(new Employee("Doe","Susan", 50, 17.00)); // creates a "john" object
+
+		/*Employee.*/ public EmployeeRecord get()
+		{
+			return new EmployeeRecord(e);
+		}
+
+
+		================ARRAYS are OBJECTS !!!! ================
+			primitive types
+				int Iarray[] = new int[20]; // allocates 20 live, active "integer" values
+				char[] cArray = new char[1000]; // 1000 "char" values
+
+
+			non primitive types (required TWO steps)
+				1) allocate the non-primitive array
+					BlobType myBlobs[] =  new BlobType[150]; // allocs 150 "reference addr"
+										 // to "Blob" instance, but
+										// UNINITIALIZED !!!
+					 myBlobs[i] = new BlobType( .....); // allocs "actual blob OBJECTS
+
+		public Employee(String ln, STring fn, float h, float pr)
+		{
+			e = new EmployeeRecord(ln,fn,h,pr); // VALIDATE data???? Perhaps !!!
+			calcGross(h,pr);
+			calcTax(gross); // Employee(ln,fn,h,pr) --> s0 --> s1 --> s2 --> s3 --get() --> sTerminal
+			calcNet(gross, tax); 
+		}
+
+			State Diagram for this constructor(represents the construct DESIGN)
+			State Model - a method of "describing" class BEHAVIORS .....
+
+
+	Module AppDriver.Main
+	begin
+	   Step 1: Create an "Employees" collection
+			Employee[] myEmps = new Employee[100]
+	   Step 2: Add employee "instances" to collection
+			 myEmps.add( new Employee( .....))
+	   Step 3: myEmps.sort()
+	   Step 4: Iterate "over" the collection to render the report
+			myEmps.Iterator.start()	//  establish the iterator origin
+			while (myEmps.Iterator.hasNext()) do
+			   Employee next = myEmps.Iterator.getNext()
+			   // process employee next
+				1) report "this" employee to report file
+				2) add this employees attribute values(hours, rate, gross, tax, net) to accumulators
+				3) add 1 to employee count
+			wend
+			Write accumulator values to report file (totals)
+			for each (totals)
+				write total/empcount yielding average to report file
+			close report file
+	end // main
+
+
+		
